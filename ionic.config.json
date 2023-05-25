@@ -1,0 +1,7 @@
+{
+  "name": "TrainingTrivialPursuit",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
