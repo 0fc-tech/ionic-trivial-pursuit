@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Open Trivia
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,42 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Open Trivia</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <form [formGroup]="formBegin"
+    (ngSubmit)="validateStart()">
+      <ion-item>
+        <ion-label position="floating">Pseudo <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input formControlName="pseudo" type="text"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="this.formBegin.get('pseudo')!.invalid && this.formBegin.get('pseudo')!.touched" lines="none">
+        <ion-text color="danger" class="form-error">
+          Merci d'entrer un pseudo de plus de 3 caractères
+        </ion-text>
+      </ion-item>
+      <ion-list>
+        <ion-item>
+          <ion-select formControlName="selectedDifficulty" aria-label="difficulty" placeholder="Niveau de difficulté">
+            <ion-select-option value="easy">Easy</ion-select-option>
+            <ion-select-option value="medium">Medium</ion-select-option>
+            <ion-select-option value="hard">Hard</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-item>
+        <ion-checkbox
+          formControlName="memorize"
+          labelPlacement="start"
+          position="floating">
+          Mémoriser ce informations
+        </ion-checkbox>
+      </ion-item>
+      <ion-button type="submit" [disabled]="!formBegin.valid" buttonType="block">
+        Commencer
+      </ion-button>
+    </form>
   </div>
 </ion-content>
